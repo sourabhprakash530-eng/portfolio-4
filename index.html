@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sourabh Prakash — MBA & Tech Portfolio</title>
+  <meta name="description" content="Portfolio of Sourabh Prakash — MBA (Marketing & Finance) with BCA Foundation. Specializing in HR & Talent Acquisition, Business Analysis, and Banking & Credit Operations." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='43' font-family='sans-serif' font-weight='900' font-size='32' text-anchor='middle' fill='%23fff'%3ESP%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Anton&display=swap" rel="stylesheet" />
+
+  <!-- GSAP & Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #090b0e;
+      --surface: #12151b;
+      --surface-2: #1a1e27;
+      --surface-3: #232834;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-faint: #6b7280;
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --accent-hr: #ec4899;
+      --accent-ba: #10b981;
+      --accent-bank: #f59e0b;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-display: 'Anton', Impact, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      selection-background-color: var(--primary);
+    }
+    ::selection { background: var(--primary); color: #fff; }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 36px);
+    }
+
+    /* Ambient background gradient glow */
+    .glow-bg {
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100vh;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 90% 40%, rgba(236, 72, 153, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 10% 70%, rgba(16, 185, 129, 0.05) 0%, transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navbar */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9, 11, 14, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: #fff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .logo-status {
+      font-size: 11px;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .nav-links a {
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.3s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+    }
+    .btn-outline {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-2);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: clamp(60px, 9vh, 110px) 0 60px;
+    }
+    .hero-pre {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(40px, 6.2vw, 76px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: #93c5fd;
+    }
+    .hero-subtitle {
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--text-muted);
+      max-width: 760px;
+      line-height: 1.55;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    /* Track Filter Ribbon */
+    .track-selector {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px;
+      border-radius: 16px;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 40px;
+    }
+    .track-btn {
+      padding: 10px 18px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.25s var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .track-btn:hover {
+      color: #fff;
+      background: var(--surface-2);
+    }
+    .track-btn.active {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+    .track-btn.active.hr-mode { background: #db2777; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.35); }
+    .track-btn.active.ba-mode { background: #059669; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35); }
+    .track-btn.active.bank-mode { background: #d97706; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35); }
+
+    /* Hero Metrics Bar */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      transition: transform 0.3s var(--ease), border-color 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hover);
+    }
+    .stat-val {
+      font-size: clamp(28px, 3.2vw, 36px);
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-sans);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Section Headers */
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: clamp(60px, 9vh, 100px) 0;
+    }
+    .section-head {
+      margin-bottom: 44px;
+    }
+    .section-badge {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-title {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 600px;
+      margin-top: 10px;
+    }
+
+    /* Track Persona Grid */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .persona-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .persona-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .persona-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .tag-hr { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); }
+    .tag-ba { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-bank { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .persona-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .persona-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .persona-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .pill {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 9px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #d1d5db;
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 28px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 20px;
+      width: 2px;
+      background: var(--surface-3);
+    }
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 24px;
+    }
+    .timeline-marker {
+      width: 42px;
+      height: 42px;
+      background: var(--surface-2);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      z-index: 2;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .timeline-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 30px;
+      transition: all 0.3s var(--ease);
+    }
+    .timeline-content:hover {
+      border-color: var(--border-hover);
+      transform: translateX(4px);
+    }
+    .timeline-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .timeline-role {
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .timeline-date {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .timeline-company {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .timeline-bullets {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .timeline-bullets li {
+      font-size: 14px;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 20px;
+      line-height: 1.55;
+    }
+    .timeline-bullets li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.5);
+    }
+    .project-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 12px;
+    }
+    .project-title {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .project-outcomes {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .project-outcomes b {
+      display: block;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+    .project-outcomes ul {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .project-outcomes li::before {
+      content: "✓ ";
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .skill-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+    .skill-category {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-chip {
+      font-size: 12.5px;
+      padding: 6px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #e5e7eb;
+      transition: all 0.2s;
+    }
+    .skill-chip:hover {
+      border-color: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Education & Achievements Grid */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .dual-grid { grid-template-columns: 1fr; }
+    }
+    .edu-card, .achieve-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .edu-degree {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .edu-school {
+      font-size: 13.5px;
+      color: #93c5fd;
+      margin: 2px 0 6px;
+    }
+    .edu-year {
+      font-size: 12px;
+      color: var(--text-faint);
+      font-weight: 600;
+    }
+
+    .achieve-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .achieve-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+    .achieve-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .achieve-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Resume Preview Section (Print-Ready) */
+    .resume-preview-box {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 16px;
+      padding: clamp(24px, 4vw, 44px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .res-head {
+      text-align: center;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .res-name {
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: 0.08em;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .res-sub {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #2563eb;
+      margin: 6px 0;
+    }
+    .res-contact {
+      font-size: 11px;
+      color: #475569;
+    }
+    .res-sec-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0f172a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 4px;
+      margin: 14px 0 8px;
+    }
+    .res-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 6px;
+    }
+    .res-subrow {
+      font-size: 11px;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+    .res-p {
+      font-size: 11px;
+      color: #334155;
+      line-height: 1.5;
+    }
+    .res-list {
+      list-style: square;
+      padding-left: 18px;
+      font-size: 11px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    /* Contact Section */
+    .contact-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface-2));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: clamp(32px, 6vw, 60px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .contact-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+      font-size: 13px;
+      color: var(--text-faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #2563eb;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: all 0.3s var(--ease);
+      z-index: 100;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Print Stylesheet for ATS Resume */
+    @media print {
+      body * { visibility: hidden; }
+      .resume-preview-box, .resume-preview-box * { visibility: visible; }
+      .resume-preview-box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      .no-print { display: none !important; }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .timeline::before { left: 15px; }
+      .timeline-marker { width: 32px; height: 32px; font-size: 12px; }
+      .timeline-item { grid-template-columns: 32px 1fr; gap: 14px; }
+      .timeline-content { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow -->
+  <div class="glow-bg"></div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <!-- Navigation -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#top" class="logo">
+        <div class="logo-badge">SP</div>
+        <div>
+          <div class="logo-text">SOURABH PRAKASH</div>
+          <div class="logo-status"><span class="status-dot"></span> Open to Opportunities · MBA 2025–27</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#tracks">Roles</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#resume">ATS Resume</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline" onclick="printResume()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print / PDF
+        </button>
+        <a href="#contact" class="btn btn-primary">Connect</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-pre">
+          <span>🎯 NMAT 162</span>
+          <span>·</span>
+          <span>Dual Tech & Business Degree</span>
+        </div>
+
+        <h1 class="hero-title">
+          Bridging Business Strategy,<br />
+          <em>People Management</em> &amp; Tech.
+        </h1>
+
+        <p class="hero-subtitle" id="heroSummary">
+          MBA candidate (Marketing &amp; Finance) with a technical BCA foundation and active US Hiring internship experience. Combining analytical precision, stakeholder communication, and cross-functional execution to deliver immediate impact.
+        </p>
+
+        <!-- Dynamic Role Selector -->
+        <div class="track-selector">
+          <button class="track-btn active" onclick="setTrack('all', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+            Complete Portfolio
+          </button>
+          <button class="track-btn" onclick="setTrack('hr', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            HR &amp; Talent Acquisition
+          </button>
+          <button class="track-btn" onclick="setTrack('ba', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            Business Analyst &amp; Tech
+          </button>
+          <button class="track-btn" onclick="setTrack('bank', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            Banking &amp; Credit Operations
+          </button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-val">11+ Mos</div>
+            <div class="stat-label">Mentoring &amp; Classroom Management</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">4 US States</div>
+            <div class="stat-label">Hiring Pipeline (OR, AL, UT, PA)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">162</div>
+            <div class="stat-label">NMAT Score (National Management Test)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">BCA + MBA</div>
+            <div class="stat-label">Dual Technical &amp; Commercial Acumen</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career Tracks Section -->
+    <section class="section" id="tracks">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge">Target Profiles</span>
+          <h2 class="section-title">Specialized Career Verticals</h2>
+          <p class="section-desc">Tailored competencies aligned with modern corporate needs across human capital, business analysis, and financial operations.</p>
+        </div>
+
+        <div class="persona-grid">
+          <!-- Card 1: HR -->
+          <div class="persona-card track-target" data-track="hr">
+            <div>
+              <span class="persona-tag tag-hr">People &amp; Culture</span>
+              <h3 class="persona-title">HR &amp; Talent Acquisition</h3>
+              <p class="persona-desc">
+                Spearheading candidate sourcing across diverse US states, qualification screening, boolean pipeline building, and leveraging an 11-month educational leadership foundation to optimize employee relations and onboarding.
+              </p>
+              <div class="persona-skills">
+                <span class="pill">US Recruitment</span>
+                <span class="pill">Boolean Sourcing</span>
+                <span class="pill">Candidate Screening</span>
+                <span class="pill">HRIS &amp; ATS</span>
+                <span class="pill">Employee Relations</span>
+              </div>
+            </div>
+            <button class="btn btn-outline" onclick="setTrack('hr')">View HR Focus →</button>
+          </div>
+
+          <!-- Card 2: BA -->
+          <div class="persona-card track-target" data-track="ba">
+            <div>
+              <span class="persona-tag tag-ba">Digital &amp; Strategy</span>
+              <h3 class="persona-title">Business Analyst &amp; Operations</h3>
+              <p class="persona-desc">
+                Uniquely suited to bridge technical software developers and business stakeholders. Experienced in workflow mapping, business requirements documentation, retail operations, and AI tool adoption analysis.
+              </p>
+              <div class="persona-skills">
+                <span class="pill">Process Mapping</span>
+                <span class="pill">BRD &amp; Documentation</span>
+                <span class="pill">Data Analysis</span>
+                <span class="pill">Advanced Excel</span>
+                <span class="pill">BCA Programming</span>
+              </div>
+            </div>
+            <button class="btn btn-outline" onclick="setTrack('ba')">View BA Focus →</button>
+          </div>
+
+          <!-- Card 3: Banking -->
+          <div class="persona-card track-target" data-track="bank">
+            <div>
+              <span class="persona-tag tag-bank">Finance &amp; Risk</span>
+              <h3 class="persona-title">Relationship Manager &amp; Credit</h3>
+              <p class="persona-desc">
+                Strong acumen in retail banking assets and liabilities, credit risk evaluation, customer communication, margin &amp; volume pricing elasticity, and financial document appraisal (ITR &amp; P&amp;L verification).
+              </p>
+              <div class="persona-skills">
+                <span class="pill">CASA &amp; Term Deposits</span>
+                <span class="pill">Credit Risk Appraisal</span>
+                <span class="pill">ITR &amp; P&amp;L Review</span>
+                <span class="pill">Client Relations</span>
+                <span class="pill">Margin &amp; Volume Analysis</span>
+              </div>
+            </div>
+            <button class="btn btn-outline" onclick="setTrack('bank')">View Banking Focus →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge">Career Track Record</span>
+          <h2 class="section-title">Work Experience &amp; Internships</h2>
+          <p class="section-desc">Hands-on corporate and institutional engagements demonstrating versatility, ownership, and measurable contribution.</p>
+        </div>
+
+        <div class="timeline">
+          <!-- 1. Exolios Global -->
+          <div class="timeline-item exp-item" data-tags="hr all">
+            <div class="timeline-marker">🇺🇸</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3 class="timeline-role">Intern — US Hiring &amp; Talent Acquisition</h3>
+                <span class="timeline-date">Jun 2026 – Present</span>
+              </div>
+              <div class="timeline-company">Exolios Global · Global Recruitment Operations</div>
+              <ul class="timeline-bullets">
+                <li>Managing end-to-end sourcing and candidate identification across four key US states: <b>Oregon, Alabama, Utah, and Pennsylvania</b>.</li>
+                <li>Executing Boolean search strings and job-board outreach to build active talent pipelines for technical and operational requirements.</li>
+                <li>Conducting preliminary candidate evaluations assessing experience fit, work authorization, salary expectations, and state-level availability across US time zones.</li>
+                <li>Maintaining candidate tracking records and coordinating stakeholder communication across multiple geographic hubs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 2. V Mart -->
+          <div class="timeline-item exp-item" data-tags="ba bank all">
+            <div class="timeline-marker">🛒</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3 class="timeline-role">Retail Operations &amp; Sales Intern</h3>
+                <span class="timeline-date">Jun 2026 – Aug 2026</span>
+              </div>
+              <div class="timeline-company">V Mart Retail Ltd. · Tedhi Puliya, Lucknow (Store Operations)</div>
+              <ul class="timeline-bullets">
+                <li>Completed comprehensive Store Operations &amp; Sales internship in a high-footfall retail environment with formal completion certification.</li>
+                <li>Authored and submitted the specialized study: <b>"Retail Business Operations: Fashion &amp; FMCG at V-MART"</b> analyzing floor layout, category margin, and inventory turnaround.</li>
+                <li>Investigated pricing elasticity and promotional discounts in project: <i>"Pricing Strategy and its Effect on Margin and Volume"</i>.</li>
+                <li>Interfaced directly with customers, applying consultative sales tactics and solving on-floor service issues.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 3. Teaching Intern -->
+          <div class="timeline-item exp-item" data-tags="hr all">
+            <div class="timeline-marker">🎓</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3 class="timeline-role">Teaching Intern &amp; Student Mentor</h3>
+                <span class="timeline-date">11 Months</span>
+              </div>
+              <div class="timeline-company">Educational Institution · Lucknow</div>
+              <ul class="timeline-bullets">
+                <li>Delivered structured curriculum and managed classroom activities for diverse cohorts, building deep communication and facilitation skills.</li>
+                <li>Formulated tailored learning materials and visual aids to boost student comprehension and participation.</li>
+                <li>Mentored students individually, addressing behavioral and academic challenges—honing core people management and empathetic listening skills.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4. BCA Tech Intern -->
+          <div class="timeline-item exp-item" data-tags="ba all">
+            <div class="timeline-marker">💻</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3 class="timeline-role">BCA Project Placement Intern</h3>
+                <span class="timeline-date">2024</span>
+              </div>
+              <div class="timeline-company">Technical Project Placement · Lucknow</div>
+              <ul class="timeline-bullets">
+                <li>Applied programming, database schemas, and IT fundamentals in a professional project deployment environment.</li>
+                <li>Collaborated with team members on software documentation, technical requirement validation, and workflow testing.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 5. Civil Engineering Intern -->
+          <div class="timeline-item exp-item" data-tags="ba all">
+            <div class="timeline-marker">📐</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h3 class="timeline-role">Civil Engineering Industry Placement</h3>
+                <span class="timeline-date">2021</span>
+              </div>
+              <div class="timeline-company">Industry Placement (Diploma Program) · Lucknow</div>
+              <ul class="timeline-bullets">
+                <li>Gained hands-on exposure to on-site project management, site safety protocols, and field operations.</li>
+                <li>Assisted senior project supervisors with structural measurements, material billing, and rigorous quality inspection documentation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Projects -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge">Research &amp; Analytics</span>
+          <h2 class="section-title">Academic &amp; Corporate Projects</h2>
+          <p class="section-desc">Independent research studies combining quantitative rigor, market surveys, and commercial strategy.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div>
+              <div class="project-tag">Retail Analytics · Pricing Strategy</div>
+              <h3 class="project-title">Pricing Strategy &amp; Its Effect on Margin and Volume (V-Mart)</h3>
+              <p class="project-desc">
+                Summer internship corporate research project evaluating how discount structures, dynamic pricing, and product bundling influence sales volume and net gross margins across Fashion and FMCG categories.
+              </p>
+              <div class="project-outcomes">
+                <b>Key Methodologies &amp; Findings:</b>
+                <ul>
+                  <li>Analyzed point-of-sale store data across promotional vs. non-promotional cycles.</li>
+                  <li>Assessed price elasticity to identify high-volume FMCG drivers vs. high-margin apparel lines.</li>
+                  <li>Formulated actionable merchandising recommendations for inventory velocity.</li>
+                </ul>
+              </div>
+            </div>
+            <div style="font-size:12px; color:var(--text-faint); font-weight:600;">Jun 2026 – Aug 2026 · V Mart Retail Ltd.</div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div>
+              <div class="project-tag">FinTech · Artificial Intelligence Research</div>
+              <h3 class="project-title">Awareness &amp; Usage of AI in Online Stock Trading Among Young Investors</h3>
+              <p class="project-desc">
+                Independent MBA research study examining behavioral adoption, trust thresholds, and algorithmic tool usage among millennial and Gen-Z retail investors navigating equity markets.
+              </p>
+              <div class="project-outcomes">
+                <b>Key Methodologies &amp; Findings:</b>
+                <ul>
+                  <li>Engineered comprehensive survey instrument and gathered primary empirical responses.</li>
+                  <li>Applied statistical frameworks to segment adoption hurdles (risk perception, UI complexity).</li>
+                  <li>Delivered a structured academic thesis with product UX and regulatory recommendations.</li>
+                </ul>
+              </div>
+            </div>
+            <div style="font-size:12px; color:var(--text-faint); font-weight:600;">MBA Core Research · 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Cloud -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge">Core Competencies</span>
+          <h2 class="section-title">Skills Matrix</h2>
+          <p class="section-desc">Multi-disciplinary capabilities spanning people management, business analysis, finance, and technology.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-block">
+            <div class="skill-category">
+              <span style="color:#f472b6;">👥</span> People &amp; Recruitment
+            </div>
+            <div class="skill-tags">
+              <span class="skill-chip">Talent Acquisition</span>
+              <span class="skill-chip">US Sourcing</span>
+              <span class="skill-chip">Boolean Search</span>
+              <span class="skill-chip">Candidate Screening</span>
+              <span class="skill-chip">Mentoring &amp; Coaching</span>
+              <span class="skill-chip">Employee Engagement</span>
+              <span class="skill-chip">Onboarding Support</span>
+            </div>
+          </div>
+
+          <div class="skill-block">
+            <div class="skill-category">
+              <span style="color:#34d399;">📊</span> Business Analysis &amp; Data
+            </div>
+            <div class="skill-tags">
+              <span class="skill-chip">Data Analysis</span>
+              <span class="skill-chip">Requirements Gathering</span>
+              <span class="skill-chip">Process Mapping</span>
+              <span class="skill-chip">Pricing Strategy</span>
+              <span class="skill-chip">Market Research</span>
+              <span class="skill-chip">Store Operations</span>
+              <span class="skill-chip">Root-Cause Analysis</span>
+            </div>
+          </div>
+
+          <div class="skill-block">
+            <div class="skill-category">
+              <span style="color:#fbbf24;">🏦</span> Banking &amp; Financial Operations
+            </div>
+            <div class="skill-tags">
+              <span class="skill-chip">Financial Analysis</span>
+              <span class="skill-chip">Credit Appraisal (Basics)</span>
+              <span class="skill-chip">ITR &amp; P&amp;L Review</span>
+              <span class="skill-chip">CASA &amp; Term Deposits</span>
+              <span class="skill-chip">Retail Lending</span>
+              <span class="skill-chip">Customer Relations</span>
+              <span class="skill-chip">Documentation</span>
+            </div>
+          </div>
+
+          <div class="skill-block">
+            <div class="skill-category">
+              <span style="color:#60a5fa;">💻</span> Technical &amp; Systems
+            </div>
+            <div class="skill-tags">
+              <span class="skill-chip">Advanced MS Excel</span>
+              <span class="skill-chip">MS Office Suite</span>
+              <span class="skill-chip">Programming Fundamentals (BCA)</span>
+              <span class="skill-chip">AI &amp; Productivity Tools</span>
+              <span class="skill-chip">Database Concepts</span>
+              <span class="skill-chip">Hindi (Native)</span>
+              <span class="skill-chip">English (Proficient)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Leadership -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="dual-grid">
+          <!-- Education Column -->
+          <div>
+            <div class="section-head" style="margin-bottom:28px;">
+              <span class="section-badge">Academic Background</span>
+              <h2 class="section-title">Education</h2>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-degree">MBA — Marketing &amp; Finance (Pursuing)</div>
+              <div class="edu-school">Babu Banarasi Das University (BBDU), Lucknow</div>
+              <div class="edu-year">2025 – 2027</div>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+              <div class="edu-school">Khawaja Moinuddin Chishti Language University, Lucknow</div>
+              <div class="edu-year">2021 – 2024</div>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-degree">Diploma in Civil Engineering</div>
+              <div class="edu-school">Maharishi University of Information Technology, Lucknow</div>
+              <div class="edu-year">2019 – 2021</div>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-degree">Intermediate (12th) &amp; High School (10th)</div>
+              <div class="edu-school">Jeevandhara Convent College, Lucknow</div>
+              <div class="edu-year">2019 · 2017</div>
+            </div>
+          </div>
+
+          <!-- Achievements Column -->
+          <div>
+            <div class="section-head" style="margin-bottom:28px;">
+              <span class="section-badge">Honors &amp; Contribution</span>
+              <h2 class="section-title">Achievements &amp; Leadership</h2>
+            </div>
+
+            <div class="achieve-card">
+              <div class="achieve-item">
+                <div class="achieve-icon">🥈</div>
+                <div>
+                  <div class="achieve-title">2nd Position — Udgam Marketing Event</div>
+                  <div class="achieve-desc">Secured podium finish among top university participants in a high-stakes competitive case presentation and marketing strategy challenge.</div>
+                </div>
+              </div>
+
+              <div class="achieve-item">
+                <div class="achieve-icon">🎯</div>
+                <div>
+                  <div class="achieve-title">NMAT Score: 162</div>
+                  <div class="achieve-desc">Achieved high percentile in national-level management entrance after systematic academic preparation across language, logic, and quant.</div>
+                </div>
+              </div>
+
+              <div class="achieve-item">
+                <div class="achieve-icon">📋</div>
+                <div>
+                  <div class="achieve-title">College Event Coordinator</div>
+                  <div class="achieve-desc">Organized university festivals and corporate seminars; managed volunteer rosters, budget allocation, vendor logistics, and guest hospitality.</div>
+                </div>
+              </div>
+
+              <div class="achieve-item">
+                <div class="achieve-icon">🤝</div>
+                <div>
+                  <div class="achieve-title">Smile Foundation NGO Volunteer</div>
+                  <div class="achieve-desc">Dedicated 1 month (2025) conducting community outreach and educational workshops for underprivileged youth.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Print-Ready ATS Resume View -->
+    <section class="section" id="resume">
+      <div class="container">
+        <div class="section-head" style="text-align:center;">
+          <span class="section-badge">Standard ATS Format</span>
+          <h2 class="section-title">Print-Ready Resume Document</h2>
+          <p class="section-desc" style="margin: 8px auto 20px;">Review the exact 1-page paper resume format. Click the button below to print or save directly as a clean PDF.</p>
+          <button class="btn btn-primary" onclick="printResume()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print or Save as PDF
+          </button>
+        </div>
+
+        <!-- Rendered ATS 1-Page Resume -->
+        <div class="resume-preview-box">
+          <div class="res-head">
+            <h1 class="res-name">SOURABH</h1>
+            <div class="res-sub" id="resHeaderSub">MBA (MARKETING &amp; FINANCE) · HUMAN RESOURCES &amp; PEOPLE MANAGEMENT</div>
+            <div class="res-contact">
+              sourabhprakash530@gmail.com &nbsp;|&nbsp; +91 8887769991 &nbsp;|&nbsp; linkedin.com/in/sourabh-ji-678bb41b6 &nbsp;|&nbsp; Lucknow, Uttar Pradesh
+            </div>
+          </div>
+
+          <div class="res-sec-title">PROFESSIONAL SUMMARY</div>
+          <p class="res-p" id="resSummaryText">
+            MBA (Marketing &amp; Finance) student seeking HR Executive, HR Operations or Talent Acquisition roles. Brings communication, mentoring and classroom-management experience from an 11-month teaching internship, plus event coordination, community volunteering and a current US hiring internship. NMAT score of 162.
+          </p>
+          <p class="res-p" style="margin-top:4px;">
+            <b>Career focus:</b> Keen to build skills in recruitment and talent acquisition, onboarding, HR operations, employee engagement, employee relations, compliance, HRIS, applicant tracking systems and HR analytics.
+          </p>
+
+          <div class="res-sec-title">EDUCATION</div>
+          <div class="res-row">
+            <span>MBA, Marketing &amp; Finance (pursuing), Babu Banarasi Das University, Lucknow</span>
+            <span>2025 – 2027</span>
+          </div>
+          <div class="res-row">
+            <span>Bachelor of Computer Applications (BCA), Khawaja Moinuddin Chishti Language University, Lucknow</span>
+            <span>2021 – 2024</span>
+          </div>
+          <div class="res-row">
+            <span>Diploma in Civil Engineering, Maharishi University of Information Technology, Lucknow</span>
+            <span>2019 – 2021</span>
+          </div>
+          <div class="res-row">
+            <span>12th Standard, Jeevandhara Convent College, Lucknow</span>
+            <span>2019</span>
+          </div>
+          <div class="res-row">
+            <span>10th Standard, Jeevandhara Convent College, Lucknow</span>
+            <span>2017</span>
+          </div>
+
+          <div class="res-sec-title">WORK EXPERIENCE</div>
+          <!-- Exolios -->
+          <div class="res-row">
+            <span>Intern, Exolios Global (US Hiring)</span>
+            <span>Jun 2026 – Present</span>
+          </div>
+          <ul class="res-list">
+            <li>Sourcing and screening candidate profiles across Oregon, Alabama, Utah and Pennsylvania using boolean search and portal outreach.</li>
+            <li>Coordinating candidate scheduling, initial qualification assessments, and maintaining pipeline tracking across time zones.</li>
+          </ul>
+
+          <!-- V Mart -->
+          <div class="res-row" style="margin-top:8px;">
+            <span>Retail Operations &amp; Sales Intern, V Mart Retail Ltd., Tedhi Puliya, Lucknow (Store Operations)</span>
+            <span>Jun 2026 – Aug 2026</span>
+          </div>
+          <ul class="res-list">
+            <li>Completed internship in Retail Operations &amp; Sales under Store Operations vertical with formal completion certificate.</li>
+            <li>Delivered project "Retail Business Operations: Fashion &amp; FMCG at V-MART", studying operations, inventory turnover, and floor sales.</li>
+            <li>Applied communication and analytical skills in customer-facing retail environments.</li>
+          </ul>
+
+          <!-- Teaching -->
+          <div class="res-row" style="margin-top:8px;">
+            <span>Teaching Intern, Educational Institution</span>
+            <span>11 months</span>
+          </div>
+          <ul class="res-list">
+            <li>Delivered structured lessons and managed classroom activities for diverse student groups.</li>
+            <li>Built strong communication, adaptability, and empathetic mentoring skills through daily student interaction.</li>
+          </ul>
+
+          <!-- BCA -->
+          <div class="res-row" style="margin-top:8px;">
+            <span>BCA Intern, Technical Project Placement</span>
+            <span>2024</span>
+          </div>
+          <ul class="res-list">
+            <li>Applied programming and IT skills in software development and team-based technical assignments.</li>
+          </ul>
+
+          <!-- Civil -->
+          <div class="res-row" style="margin-top:8px;">
+            <span>Civil Engineering Intern, Industry Placement (Diploma Program)</span>
+            <span>2021</span>
+          </div>
+          <ul class="res-list">
+            <li>Hands-on exposure to site management, measurements, and quality inspections.</li>
+          </ul>
+
+          <div class="res-sec-title">PROJECTS</div>
+          <div class="res-row">
+            <span>Pricing Strategy and its Effect on Margin and Volume, with special reference to V Mart</span>
+            <span>Jun 2026 – Aug 2026</span>
+          </div>
+          <p class="res-p">Examined how discount structures and dynamic pricing affect net retail margin and sales turnover.</p>
+
+          <div class="res-row" style="margin-top:6px;">
+            <span>Awareness and Usage of Artificial Intelligence in Online Stock Trading among Young Investors</span>
+            <span>MBA · 2025</span>
+          </div>
+          <p class="res-p">Designed empirical survey, collected primary responses, and applied analytics to model investor AI adoption.</p>
+
+          <div class="res-sec-title">ACHIEVEMENTS &amp; LEADERSHIP</div>
+          <ul class="res-list">
+            <li><b>2nd position, Udgam Marketing Event:</b> Placed among top participants in university-level marketing competition.</li>
+            <li><b>NMAT score of 162 (2024–25):</b> Secured competitive percentile after disciplined preparation.</li>
+            <li><b>Event Coordinator:</b> Planned and managed college events, logistics, and multi-team communications.</li>
+            <li><b>NGO Volunteer, Smile Foundation (1 month, 2025):</b> Supported community outreach and educational programmes.</li>
+          </ul>
+
+          <div class="res-sec-title">SKILLS</div>
+          <p class="res-p"><b>People &amp; Communication:</b> Talent Sourcing, Candidate Screening, Mentoring, Event Coordination, Leadership</p>
+          <p class="res-p"><b>Analytical &amp; Business:</b> Data Analysis, Process Mapping, Pricing Strategy, Advanced Excel, Decision Making</p>
+          <p class="res-p"><b>Technical &amp; Languages:</b> MS Office Suite, AI Productivity Tools, Programming Basics (BCA) · Hindi, English</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <h2 class="contact-title">Let's Connect &amp; Collaborate</h2>
+          <p class="contact-desc">
+            Currently open to opportunities across <b>HR &amp; Talent Acquisition</b>, <b>Business Analysis</b>, and <b>Banking &amp; Credit Operations</b>. Reach out via email, phone, or LinkedIn.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:sourabhprakash530@gmail.com" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              sourabhprakash530@gmail.com
+            </a>
+            <button class="btn btn-outline" onclick="copyContact('sourabhprakash530@gmail.com')">
+              Copy Email
+            </button>
+            <a href="tel:+918887769991" class="btn btn-outline">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              +91 8887769991
+            </a>
+            <a href="https://linkedin.com/in/sourabh-ji-678bb41b6" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              LinkedIn Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer container">
+    <div>© 2026 Sourabh Prakash · Lucknow, Uttar Pradesh</div>
+    <div>Built with HTML5, CSS3, &amp; GSAP · ATS Compliant</div>
+  </footer>
+
+  <script>
+    // Copy to clipboard helper
+    function copyContact(text) {
+      navigator.clipboard.writeText(text);
+      const toast = document.getElementById("toast");
+      toast.textContent = "Copied to clipboard: " + text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    // Print ATS Resume
+    function printResume() {
+      window.print();
+    }
+
+    // Dynamic Track Profiles
+    const trackData = {
+      all: {
+        summary: "MBA candidate (Marketing & Finance) with a technical BCA foundation and active US Hiring internship experience. Combining analytical precision, stakeholder communication, and cross-functional execution to deliver immediate impact.",
+        headerSub: "MBA (MARKETING & FINANCE) · HUMAN RESOURCES & PEOPLE MANAGEMENT",
+        resSummary: "MBA (Marketing & Finance) student seeking HR Executive, HR Operations or Talent Acquisition roles. Brings communication, mentoring and classroom-management experience from an 11-month teaching internship, plus event coordination, community volunteering and a current US hiring internship. NMAT score of 162."
+      },
+      hr: {
+        summary: "Targeting HR Executive, Talent Acquisition & HR Operations roles. Experienced in US candidate sourcing across 4 states (Exolios Global), coupled with 11 months of classroom leadership and stakeholder mentoring.",
+        headerSub: "HUMAN RESOURCES · TALENT ACQUISITION · PEOPLE OPERATIONS",
+        resSummary: "MBA (Marketing & Finance) student specializing in Talent Acquisition and Human Resources. Experienced in sourcing candidate pipelines across 4 US states (Oregon, Alabama, Utah, Pennsylvania) with Exolios Global, alongside 11 months of classroom leadership, student mentoring, and college event management."
+      },
+      ba: {
+        summary: "Targeting Business Analyst, Project Operations & Functional Trainee roles. Bridging computer applications (BCA) with business management (MBA) to analyze requirements, map workflows, and execute digital transformation initiatives.",
+        headerSub: "BUSINESS ANALYST · PROJECT OPERATIONS · FUNCTIONAL TRAINEE",
+        resSummary: "MBA (Marketing & Finance) student with a technical BCA foundation, seeking a Business Analyst or Project Operations role. Combines programming and database knowledge with commercial training, suited to bridging technical developers and corporate clients. Experienced in retail data analysis (V-Mart) and AI fintech research."
+      },
+      bank: {
+        summary: "Targeting Relationship Manager, Branch Banking & Credit Operations Trainee roles. Equipped with strong analytical acumen in retail banking products, credit appraisal, margin-volume pricing, and customer relationship building.",
+        headerSub: "RELATIONSHIP MANAGER · BRANCH BANKING · CREDIT OPERATIONS",
+        resSummary: "MBA (Marketing & Finance) student seeking a Relationship Manager or Credit Operations Trainee role in retail banking. Strong in customer communication, financial analysis, CASA/LAP/home loan products, ITR/P&L document appraisal, and retail volume pricing from V-Mart store operations."
+      }
+    };
+
+    function setTrack(track, btnEl) {
+      // Update buttons
+      if (!btnEl) {
+        document.querySelectorAll(".track-btn").forEach(b => {
+          if (b.textContent.toLowerCase().includes(track)) btnEl = b;
+        });
+      }
+      if (btnEl) {
+        document.querySelectorAll(".track-btn").forEach(b => b.classList.remove("active", "hr-mode", "ba-mode", "bank-mode"));
+        btnEl.classList.add("active");
+        if (track === "hr") btnEl.classList.add("hr-mode");
+        if (track === "ba") btnEl.classList.add("ba-mode");
+        if (track === "bank") btnEl.classList.add("bank-mode");
+      }
+
+      // Smooth summary text change
+      const data = trackData[track] || trackData.all;
+      const heroSum = document.getElementById("heroSummary");
+      const resHeaderSub = document.getElementById("resHeaderSub");
+      const resSum = document.getElementById("resSummaryText");
+
+      if (window.gsap) {
+        gsap.to([heroSum, resHeaderSub, resSum], {
+          opacity: 0,
+          y: -8,
+          duration: 0.2,
+          onComplete: () => {
+            heroSum.textContent = data.summary;
+            resHeaderSub.textContent = data.headerSub;
+            resSum.textContent = data.resSummary;
+            gsap.to([heroSum, resHeaderSub, resSum], { opacity: 1, y: 0, duration: 0.3 });
+          }
+        });
+      } else {
+        heroSum.textContent = data.summary;
+        resHeaderSub.textContent = data.headerSub;
+        resSum.textContent = data.resSummary;
+      }
+
+      // Filter or highlight relevant experiences
+      document.querySelectorAll(".exp-item").forEach(item => {
+        const tags = item.dataset.tags || "";
+        if (track === "all" || tags.includes(track)) {
+          item.style.opacity = "1";
+          item.style.transform = "none";
+        } else {
+          item.style.opacity = "0.35";
+        }
+      });
+    }
+
+    // Scroll reveal animations
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from(".hero-title, .hero-subtitle, .track-selector, .hero-stats", {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          stagger: 0.1,
+          ease: "expo.out"
+        });
+
+        gsap.utils.toArray(".section").forEach(sec => {
+          gsap.from(sec.querySelectorAll(".section-head, .persona-card, .timeline-content, .project-card, .skill-block"), {
+            scrollTrigger: {
+              trigger: sec,
+              start: "top 80%"
+            },
+            opacity: 0,
+            y: 35,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "expo.out"
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
